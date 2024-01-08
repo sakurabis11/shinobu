@@ -11,7 +11,7 @@ charset_normalizer
 urllib3
 chardet
 bs4
-LOG_CHANNEL
+spotipy
 cinemagoer
 Heroku3
 search_engine_parser
