@@ -1,6 +1,6 @@
 import logging
 from pyrogram.errors import InputUserDeactivated, UserNotParticipant, FloodWait, UserIsBlocked, PeerIdInvalid
-from info import AUTH_CHANNEL, AUTH_CHANNEL_2, LONG_IMDB_DESCRIPTION, MAX_LIST_ELM
+from info import AUTH_CHANNEL, LONG_IMDB_DESCRIPTION, MAX_LIST_ELM
 from imdb import Cinemagoer
 import asyncio
 from pyrogram.types import Message, InlineKeyboardButton
@@ -42,7 +42,7 @@ class temp(object):
 
 async def is_subscribed(bot, query):
     try:
-        user = await bot.get_chat_member(AUTH_CHANNEL, AUTH_CHANNEL_2, query.from_user.id)
+        user = await bot.get_chat_member(AUTH_CHANNEL, query.from_user.id)
         if user.status != 'kicked':
             return True  
 
