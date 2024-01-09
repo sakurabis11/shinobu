@@ -43,16 +43,14 @@ class temp(object):
 async def is_subscribed(bot, query):
     try:
         user = await bot.get_chat_member(AUTH_CHANNEL, query.from_user.id)
-        if user.status != 'kicked':
-            return True  
-
     except UserNotParticipant:
-        return False
+        pass
     except Exception as e:
         logger.exception(e)
-        return False
+    else:
+        if user.status != 'kicked':
+            return True
 
-    return False 
 
 
 async def get_poster(query, bulk=False, id=False, file=None):
