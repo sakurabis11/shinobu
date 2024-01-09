@@ -59,7 +59,7 @@ if (AUTH_CHANNEL and AUTH_CHANNEL_2) and not await is_subscribed(client, message
         try:
             invite_link = await client.create_chat_invite_link(int(AUTH_CHANNEL))
             invite_link_2 = await client.create_chat_invite_link(int(AUTH_CHANNEL_2))
-    except ChatAdminRequired:
+        except ChatAdminRequired:
         logger.error("Make sure Bot is admin in Forcesub channel")
         return
 
