@@ -8,7 +8,7 @@ from pyrogram.errors import ChatAdminRequired, FloodWait
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from database.ia_filterdb import Media, get_file_details, unpack_new_file_id
 from database.users_chats_db import db
-from info import CHANNELS, ADMINS, AUTH_CHANNEL, AUTH_CHANNEL_2, LOG_CHANNEL, PICS, BATCH_FILE_CAPTION, CUSTOM_FILE_CAPTION, PROTECT_CONTENT, MSG_ALRT, MAIN_CHANNEL
+from info import CHANNELS, ADMINS, AUTH_CHANNEL, LOG_CHANNEL, PICS, BATCH_FILE_CAPTION, CUSTOM_FILE_CAPTION, PROTECT_CONTENT, MSG_ALRT, MAIN_CHANNEL
 from utils import get_settings, get_size, is_subscribed, save_group_settings, temp
 from database.connections_mdb import active_connection
 import re
@@ -55,10 +55,9 @@ async def start(client, message):
             parse_mode=enums.ParseMode.HTML
         )
         return
-    if (AUTH_CHANNEL and AUTH_CHANNEL_2) and not await is_subscribed(client, message):
+    if (AUTH_CHANNEL and not await is_subscribed(client, message):
         try:
             invite_link = await client.create_chat_invite_link(int(AUTH_CHANNEL))
-            invite_link_2 = await client.create_chat_invite_link(int(AUTH_CHANNEL_2))
         except ChatAdminRequired:
             logger.error("Make sure Bot is admin in Forcesub channel")
         return
@@ -69,7 +68,7 @@ async def start(client, message):
                 " Join Updates Channel", url=invite_link.invite_link  # Use the first invite link
             ),
             InlineKeyboardButton(
-                " Join Updates Channel 2", url=invite_link_2.invite_link  # Use the second link if intended
+                " Join Updates Channel 2", url=  # Use the second link if intended
             )
         ]
     ]
