@@ -540,7 +540,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         )
 
     elif query.data == "start":
-        if message.from_user.id is in ADMINS:
+        if message.from_user.id in ADMINS:
         buttons = [[
             InlineKeyboardButton("➕️ Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Cʜᴀᴛ ➕", url=f"http://t.me/{temp.U_NAME}?startgroup=true"),
             ],[
