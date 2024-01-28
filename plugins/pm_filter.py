@@ -14,7 +14,7 @@ from info import ADMINS, AUTH_CHANNEL, FILE_CHANNEL, AUTH_USERS, CUSTOM_FILE_CAP
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 from pyrogram import Client, filters, enums
 from typing import Optional
-from pyrogram.errors import FloodWait, UserIsBlocked, MessageNotModified, PeerIdInvalid
+from pyrogram.errors import FloodWait, UserIsBlocked, MessageNotModified, PeerIdInvalid, PermissionError
 from utils import get_size, is_subscribed, get_poster, search_gagala, temp, get_settings, save_group_settings
 from database.users_chats_db import db
 from database.ia_filterdb import Media, get_file_details, get_search_results
@@ -38,6 +38,9 @@ FILTER_MODE = {}
 
 @Client.on_message(filters.command('autofilter'))
 async def fil_mod(client, message): 
+    user = await client.get_chat_member(message.chat.id, message.from_user.id)
+    if user.status not in [enums.ChatMemberStatus.OWNER, enums.ChatMemberStatus.ADMINISTRATOR]:
+      raise PermissionError("You are not allowed to use this command")
     mode_on = ["yes", "on", "true"]
     mode_off = ["no", "off", "false"]
 
