@@ -42,15 +42,16 @@ async def start(client, message):
         await client.send_message(LOG_CHANNEL, script.LOG_TEXT_P.format(message.from_user.id, message.from_user.mention))
     if len(message.command) != 2:
         buttons = [[
-            InlineKeyboardButton('Nᴏᴛʜɪɴɢ', callback_data='start')
+            InlineKeyboardButton("➕️ Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Cʜᴀᴛ ➕", url=f"http://t.me/{temp.U_NAME}?startgroup=true"),
+            ],[
+            InlineKeyboardButton("Hᴇʟᴩ 🕸️", callback_data="help"),
+            InlineKeyboardButton("Aʙᴏᴜᴛ ✨", callback_data="about")
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
-        m=await message.reply_sticker("CAACAgIAAxkBAAIMJmUb_Ce51G02zidPr33bHPtugxK5AAJcGwACnaopSohyhgV9l7BoHgQ") 
-        await asyncio.sleep(1)
+        m=await message.reply_sticker("CAACAgQAAxkBAAIvv2W6cFLv0PtaEwLT4ta09fABAxKkAAJuDwAC4eqxUNoxB5joJxGiHgQ") 
+        await asyncio.sleep(5)
         await m.delete()        
-        await message.reply_photo(
-            photo=random.choice(PICS),
-            caption=script.SUR_TXT.format(message.from_user.mention, temp.U_NAME, temp.B_NAME),
+        await message.reply_text(text=script.START_TXT.format(message.from_user.mention, temp.U_NAME, temp.B_NAME),
             reply_markup=reply_markup,
             parse_mode=enums.ParseMode.HTML
         )
