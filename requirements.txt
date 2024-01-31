@@ -8,7 +8,6 @@ pysrt
 requests
 tqdm
 charset_normalizer
-urllib3
 chardet
 bs4
 spotipy
