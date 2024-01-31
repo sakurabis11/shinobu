@@ -16,6 +16,7 @@ I Cᴀɴ Pʀᴏᴠɪᴅᴇ Mᴏᴠɪᴇ Fᴏʀ Yᴏᴜ Jᴜsᴛ Aᴅᴅ Mᴇ Iɴ
 
     DMCA_TXT = """📯 𝗗𝗶𝘀𝗰𝗹𝗮𝗶𝗺𝗲𝗿:
 All the files in this bot are freely available on the internet or posted by somebody else.
+
 This bot is indexing files which are already uploaded on Telegram for ease of searching,
 We respect all the copyright laws and works in compliance with DMCA and EUCD.
 
