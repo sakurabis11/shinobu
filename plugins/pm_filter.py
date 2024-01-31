@@ -553,7 +553,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             InlineKeyboardButton('⛓ ᴄᴏɴɴᴇᴄᴛɪᴏɴ', callback_data='coct'),
             InlineKeyboardButton('🎛 ᴇxᴛʀᴀ ᴍᴏᴅs', callback_data='extra')
             ],[
-            InlineKeyboardButton('📯 ᴅᴍᴄᴀ', callback_data='dmca')
+            InlineKeyboardButton('📯 ᴅᴍᴄᴀ', callback_data='dmca'),
             InlineKeyboardButton('📁sᴛᴀᴛs', callback_data='stats')
             ],[
             InlineKeyboardButton('🌿 ᴏᴡɴ ɪɴғᴏ', url='https://t.me/sd_bots'),
