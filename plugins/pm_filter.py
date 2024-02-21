@@ -519,9 +519,14 @@ async def cb_handler(client: Client, query: CallbackQuery):
             caption=f_caption,
             protect_content=True if ident == 'checksubp' else False
         )
-        await message.reply_text("ɪᴍᴘᴏʀᴛᴀɴᴛ\n\nғɪʟᴇs ᴡɪʟʟ ʙᴇ ᴅᴇʟᴇᴛᴇᴅ ɪɴ 𝟻 ᴍɪɴᴜᴛᴇs, sᴏ ᴘʟᴇᴀsᴇ sᴇɴᴅ ᴛʜɪs ғɪʟᴇ ᴛᴏ ᴛʜᴇ sᴀᴠᴇᴅ ᴍᴇssᴀɢᴇ")
+        mrt=query.from_user.id
+        ar=await client.send_message(mrt, text="ɪᴍᴘᴏʀᴛᴀɴᴛ\n\nғɪʟᴇs ᴡɪʟʟ ʙᴇ ᴅᴇʟᴇᴛᴇᴅ ɪɴ 𝟻 ᴍɪɴᴜᴛᴇs, sᴏ ᴘʟᴇᴀsᴇ sᴇɴᴅ ᴛʜɪs ғɪʟᴇ ᴛᴏ ᴛʜᴇ sᴀᴠᴇᴅ ᴍᴇssᴀɢᴇ")
         await asyncio.sleep(300)
         await MRTG.delete()
+        await asyncio.sleep(300)
+        await ar.delete()
+        await client.send_message(mrt, text="ғɪʟᴇs ᴀʀᴇ ᴅᴇʟᴇᴛᴇᴅ")
+        
     elif query.data == "pages":
         await query.answer()
 
