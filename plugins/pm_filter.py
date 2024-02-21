@@ -70,8 +70,7 @@ async def give_filter(client,message):
     name = message.text
     grp_name = message.chat.title
     invite_link = await client.export_chat_invite_link(group_id)
-    <a href=invite_link>{grp_name}</a>
-    await client.send_message(REQUESTED_CHANNEL, text=f"ʜᴇʏ {message.from_user.mention}\n\nᴍᴏᴠɪᴇ_ɴᴀᴍᴇ: {name}\n\nɢʀᴏᴜᴘ_ɴᴀᴍᴇ: <a href=invite_link>{grp_name}</a>")
+    await client.send_message(REQUESTED_CHANNEL, text=f"ʜᴇʏ {message.from_user.mention}\n\nᴍᴏᴠɪᴇ_ɴᴀᴍᴇ: {name}\n\nɢʀᴏᴜᴘ_ɴᴀᴍᴇ: <a href=invite_link>{grp_name}</a>",disable_web_page_preview=True)
 
     keywords = await get_filters(group_id)
     for keyword in reversed(sorted(keywords, key=len)):
