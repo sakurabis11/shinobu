@@ -513,19 +513,12 @@ async def cb_handler(client: Client, query: CallbackQuery):
         if f_caption is None:
             f_caption = f"{title}"
         await query.answer()
-        MRTG=await client.send_cached_media(
+        await client.send_cached_media(
             chat_id=query.from_user.id,
             file_id=file_id,
             caption=f_caption,
             protect_content=True if ident == 'checksubp' else False
         )
-        mrt=query.from_user.id
-        ar=await client.send_message(mrt, text="ɪᴍᴘᴏʀᴛᴀɴᴛ\n\nғɪʟᴇs ᴡɪʟʟ ʙᴇ ᴅᴇʟᴇᴛᴇᴅ ɪɴ 𝟻 ᴍɪɴᴜᴛᴇs, sᴏ ᴘʟᴇᴀsᴇ sᴇɴᴅ ᴛʜɪs ғɪʟᴇ ᴛᴏ ᴛʜᴇ sᴀᴠᴇᴅ ᴍᴇssᴀɢᴇ")
-        await asyncio.sleep(300)
-        await MRTG.delete()
-        await asyncio.sleep(300)
-        await ar.delete()
-        await client.send_message(mrt, text="ғɪʟᴇs ᴀʀᴇ ᴅᴇʟᴇᴛᴇᴅ")
         
     elif query.data == "pages":
         await query.answer()
