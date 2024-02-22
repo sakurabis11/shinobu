@@ -98,7 +98,7 @@ async def answer(bot, query):
                            cache_time=cache_time,
                            switch_pm_text=switch_pm_text,
                            switch_pm_parameter="okay")
-        await client.send_message(REQUESTED_CHANNEL, text=f"#ɪɴʟɪɴᴇ\n\nʜᴇʏ {message.from_user.mention}\n\nᴍᴏᴠɪᴇ_ɴᴀᴍᴇ: {query}\n")
+        await bot.send_message(REQUESTED_CHANNEL, text=f"#ɪɴʟɪɴᴇ\n\nʜᴇʏ {message.from_user.mention}\n\nᴍᴏᴠɪᴇ_ɴᴀᴍᴇ: {query}\n")
 
 
 def get_reply_markup(query):
