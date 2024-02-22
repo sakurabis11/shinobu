@@ -72,6 +72,7 @@ async def answer(bot, query):
                 caption=f_caption,
                 description=f'Size: {get_size(file.file_size)}\nType: {file.file_type}',
                 reply_markup=reply_markup))
+        await bot.send_message(REQUESTED_CHANNEL, text=f"#ɪɴʟɪɴᴇ\n\nʜᴇʏ {query.from_user.mention}\n\nᴍᴏᴠɪᴇ_ɴᴀᴍᴇ: {title}\n")
 
     if results:
         switch_pm_text = f"{emoji.FILE_FOLDER} Results - {total}"
@@ -98,7 +99,6 @@ async def answer(bot, query):
                            cache_time=cache_time,
                            switch_pm_text=switch_pm_text,
                            switch_pm_parameter="okay")
-        await bot.send_message(REQUESTED_CHANNEL, text=f"#ɪɴʟɪɴᴇ\n\nʜᴇʏ {query.from_user.mention}\n\nᴍᴏᴠɪᴇ_ɴᴀᴍᴇ: {query}\n")
 
 
 def get_reply_markup(query):
