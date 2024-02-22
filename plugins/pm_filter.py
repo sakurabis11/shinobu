@@ -10,7 +10,7 @@ import pyrogram
 from database.connections_mdb import active_connection, all_connections, delete_connection, if_active, make_active, \
     make_inactive
 from info import ADMINS, AUTH_CHANNEL, FILE_CHANNEL, AUTH_USERS, CUSTOM_FILE_CAPTION, NOR_IMG, AUTH_GROUPS, P_TTI_SHOW_OFF, IMDB, \
-    SINGLE_BUTTON, SPELL_CHECK_REPLY, IMDB_TEMPLATE, SPELL_IMG, MSG_ALRT, FILE_FORWARD, MAIN_CHANNEL, LOG_CHANNEL, REQUESTED_CHANNEL
+    SINGLE_BUTTON, SPELL_CHECK_REPLY, IMDB_TEMPLATE, SPELL_IMG, MSG_ALRT, FILE_FORWARD, MAIN_CHANNEL, LOG_CHANNEL
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 from pyrogram import Client, filters, enums
 from typing import Optional
@@ -38,9 +38,6 @@ FILTER_MODE = {}
 
 @Client.on_message(filters.command('autofilter'))
 async def fil_mod(client, message): 
-    user = await client.get_chat_member(message.chat.id, message.from_user.id)
-    if user.status not in [enums.ChatMemberStatus.OWNER, enums.ChatMemberStatus.ADMINISTRATOR]:
-      raise PermissionError("You are not allowed to use this command")
     mode_on = ["yes", "on", "true"]
     mode_off = ["no", "off", "false"]
 
@@ -68,9 +65,6 @@ async def give_filter(client,message):
     await global_filters(client, message)
     group_id = message.chat.id
     name = message.text
-    grp_name = message.chat.title
-    invite_link = await client.export_chat_invite_link(group_id)
-    await client.send_message(REQUESTED_CHANNEL, text=f"ʜᴇʏ {message.from_user.mention}\n\nᴍᴏᴠɪᴇ_ɴᴀᴍᴇ: {name}\n\nɢʀᴏᴜᴘ_ɴᴀᴍᴇ: {grp_name}\n\nʟɪɴᴋ: {invite_link}",disable_web_page_preview=True)
 
     keywords = await get_filters(group_id)
     for keyword in reversed(sorted(keywords, key=len)):
@@ -519,7 +513,6 @@ async def cb_handler(client: Client, query: CallbackQuery):
             caption=f_caption,
             protect_content=True if ident == 'checksubp' else False
         )
-        
     elif query.data == "pages":
         await query.answer()
 
@@ -534,6 +527,17 @@ async def cb_handler(client: Client, query: CallbackQuery):
 
     elif query.data == "tinfo":
         await query.answer("▣ ᴛɪᴘs ▣\n\n★ ᴛʏᴘᴇ ᴄᴏʀʀᴇᴄᴛ sᴘᴇʟʟɪɴɢ (ɢᴏᴏɢʟᴇ)\n\n★ ɪғ ʏᴏᴜ ɴᴏᴛ ɢᴇᴛ ʏᴏᴜʀ ғɪʟᴇ ɪɴ ᴛʜᴇ ʙᴜᴛᴛᴏɴ ᴛʜᴇɴ ᴛʜᴇ ɴᴇxᴛ sᴛᴇᴘ ɪs ᴄʟɪᴄᴋ ɴᴇxᴛ ʙᴜᴛᴛᴏɴ.\n\n★ ᴄᴏɴᴛɪɴᴜᴇ ᴛʜɪs ᴍᴇᴛʜᴏᴅ ᴛᴏ ɢᴇᴛᴛɪɴɢ ʏᴏᴜ ғɪʟᴇ\n\n❣ ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴄɪɴᴇᴍᴀʟᴀ. ᴄᴏᴍ", show_alert=True)
+
+    elif query.data == "surprise":
+        btn = [[
+            InlineKeyboardButton('Nᴏᴛʜɪɴɢ', callback_data='start')
+        ]]
+        reply_markup=InlineKeyboardMarkup(btn)
+        await query.message.edit_text(
+            text=script.SUR_TXT.format(query.from_user.mention, temp.U_NAME, temp.B_NAME),
+            reply_markup=reply_markup,
+            parse_mode=enums.ParseMode.HTML
+        )
 
     elif query.data == "start":
         buttons = [[
@@ -552,15 +556,15 @@ async def cb_handler(client: Client, query: CallbackQuery):
     elif query.data == "help":
         buttons = [[
             InlineKeyboardButton('⚒ ᴍᴀɴɴᴜʟ ғɪʟᴛᴇʀ', callback_data='manuelfilter'),
-            InlineKeyboardButton('🔨 ᴀᴜᴛᴏ ғɪʟᴛᴇʀ', callback_data='autofilter')
+            InlineKeyboardButton("🔎 Sᴇᴀʀᴄʜ", switch_inline_query_current_chat='') 
             ],[
-            InlineKeyboardButton('⛓ ᴄᴏɴɴᴇᴄᴛɪᴏɴ', callback_data='coct'),
-            InlineKeyboardButton('🎛 ᴇxᴛʀᴀ ᴍᴏᴅs', callback_data='extra')
+            InlineKeyboardButton('🔨 ᴀᴜᴛᴏ ғɪʟᴛᴇʀ', callback_data='autofilter'),
+            InlineKeyboardButton('⛓ ᴄᴏɴɴᴇᴄᴛɪᴏɴ', callback_data='coct')
             ],[
-            InlineKeyboardButton('📯 ᴅᴍᴄᴀ', callback_data='dmca'),
+            InlineKeyboardButton('🎛 ᴇxᴛʀᴀ ᴍᴏᴅs', callback_data='extra'),
             InlineKeyboardButton('📁sᴛᴀᴛs', callback_data='stats')
             ],[
-            InlineKeyboardButton('🌿 ᴏᴡɴ ɪɴғᴏ', url='https://t.me/sd_bots'),
+            InlineKeyboardButton('😈 ᴏᴡɴ ɪɴғᴏ', url='https://t.me/amal_nath_05'),
             ],[
             InlineKeyboardButton('🏠 ʜᴏᴍᴇ', callback_data='start'),
             InlineKeyboardButton('🔒 ᴄʟᴏꜱᴇ', callback_data="close_data")
@@ -589,7 +593,6 @@ async def cb_handler(client: Client, query: CallbackQuery):
         reply_markup = InlineKeyboardMarkup(buttons)
         await query.message.edit_text(
             text=script.ABOUT_TXT.format(temp.B_NAME),
-            disable_web_page_preview=True,
             reply_markup=reply_markup,
             parse_mode=enums.ParseMode.HTML
         )
@@ -634,17 +637,6 @@ async def cb_handler(client: Client, query: CallbackQuery):
             reply_markup=reply_markup,
             parse_mode=enums.ParseMode.HTML
         )
-    elif query.data == "dmca":
-        buttons = [[
-            InlineKeyboardButton('ʙᴀᴄᴋ', callback_data='help'),
-            InlineKeyboardButton('ᴄᴏɴᴛᴀᴄᴛ ᴀᴅᴍɪɴ', url="https://t.me/MrTG_Coder"),
-        ]]
-        reply_markup = InlineKeyboardMarkup(buttons)
-        await query.message.edit_text(
-            text=script.DMCA_TXT,
-            reply_markup=reply_markup,
-            parse_mode=enums.ParseMode.HTML
-        )
     elif query.data == "extra":
         buttons = [[
             InlineKeyboardButton('ʙᴀᴄᴋ', callback_data='help'),
@@ -686,7 +678,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             parse_mode=enums.ParseMode.HTML
         )
     elif query.data == "rfrsh":
-        await query.answer("ғᴇᴛᴄʜɪɴɢ")
+        await query.answer("𝙁𝙚𝙩𝙘𝙝𝙞𝙣𝙜 𝙈𝙤𝙣𝙜𝙤𝘿𝙗 𝘿𝙖𝙩𝙖𝘽𝙖𝙨𝙚")
         buttons = [[
             InlineKeyboardButton('ʙᴀᴄᴋ', callback_data='start'),
             InlineKeyboardButton('ʀᴇғʀᴇsʜ', callback_data='rfrsh')
