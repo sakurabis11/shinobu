@@ -45,8 +45,8 @@ async def start(client, message):
             InlineKeyboardButton('Nᴏᴛʜɪɴɢ', callback_data='start')
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
-        m=await message.reply_sticker("CAACAgIAAxkBAAIMJmUb_Ce51G02zidPr33bHPtugxK5AAJcGwACnaopSohyhgV9l7BoHgQ") 
-        await asyncio.sleep(1)
+        m=await message.reply_sticker("CAACAgQAAxkBAAIvv2W6cFLv0PtaEwLT4ta09fABAxKkAAJuDwAC4eqxUNoxB5joJxGiHgQ") 
+        await asyncio.sleep(5)
         await m.delete()        
         await message.reply_photo(
             photo=random.choice(PICS),
@@ -65,6 +65,9 @@ async def start(client, message):
             [
                 InlineKeyboardButton(
                     "🤖 Join Updates Channel", url=invite_link.invite_link
+                ),
+                InlineKeyboardButton(
+                    "🤖 Join Updates Channel 2", url=MAIN_CHANNEL
                 )
             ]
         ]
