@@ -131,25 +131,23 @@ async def start(client, message):
             if f_caption is None:
                 f_caption = f"{title}"
             try:
-                x=await client.send_cached_media(
+                await client.send_cached_media(
                     chat_id=message.from_user.id,
                     file_id=msg.get("file_id"),
                     caption=f_caption,
                     protect_content=msg.get('protect', False),
                     )
-                await asyncio.sleep(30)
-                await x.delete()
+                
             except FloodWait as e:
                 await asyncio.sleep(e.x)
                 logger.warning(f"Floodwait of {e.x} sec.")
-                y=await client.send_cached_media(
+                await client.send_cached_media(
                     chat_id=message.from_user.id,
                     file_id=msg.get("file_id"),
                     caption=f_caption,
                     protect_content=msg.get('protect', False),
                     )
-                await asyncio.sleep(30)
-                await y.delete()
+                
             except Exception as e:
                 logger.warning(e, exc_info=True)
                 continue
@@ -247,7 +245,7 @@ async def start(client, message):
         )
     await asyncio.sleep(40)
     await z.delete()
-                    
+    await client.send_message(message.from_user.id, text=f"ᴛʜɪs ғɪʟᴇ ɪs ᴅᴇʟᴇᴛᴇᴅ ʙᴇᴄᴀᴜsᴇ ᴏғ ᴄᴏᴘʏʀɪɢʜᴛ ɪssᴜᴇ")         
 
 @Client.on_message(filters.command('channel') & filters.user(ADMINS))
 async def channel_info(bot, message):
