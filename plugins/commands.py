@@ -245,12 +245,11 @@ async def start(client, message):
     t=await client.send_cached_media(
         chat_id=message.from_user.id,
         file_id=file_id,
-        caption=f_caption,
+        caption=f_caption and mr,
         reply_markup=InlineKeyboardMarkup( [ [ InlineKeyboardButton('❤️‍🔥 ᴊᴏɪɴ ᴛᴏ ᴄʜᴀɴɴᴇʟ ❤️‍🔥', url=(MAIN_CHANNEL)) ] ] ),
-        text=mr
         protect_content=True if pre == 'filep' else False,
         )
-    await asyncio.sleep(20) 
+    await asyncio.sleep(10) 
     await t.delete()
     await client.send_message(message.from_user.id, text="delete suceesfully")
 
