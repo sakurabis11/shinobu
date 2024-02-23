@@ -16,6 +16,7 @@ import json
 import base64
 logger = logging.getLogger(__name__)
 
+mr = "ᴛʜɪs ғɪʟᴇs ᴡɪʟʟ ʙᴇ ᴅᴇʟᴇᴛᴇᴅ ɪɴ 𝟻 ᴍɪɴᴜᴛᴇs, ʙᴇᴄᴀᴜsᴇ ᴏғ ᴛʜᴇ ᴄᴏᴘʏʀɪɢʜᴛ ɪssᴜᴇ, sᴏ ɪғ ʏᴏᴜ ᴡᴀɴɴᴀ ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ ᴛʜᴇɴ ғᴏʀᴡᴀʀᴅ ᴛʜɪs ғɪʟᴇ ᴛᴏ sᴀᴠᴇᴅ ᴍᴇssᴀɢᴇ ᴀɴᴅ ᴅᴏᴡɴʟᴏᴀᴅ ɪᴛ."
 BATCH_FILES = {}
 
 @Client.on_message(filters.command("start") & filters.incoming)
@@ -135,9 +136,10 @@ async def start(client, message):
                     chat_id=message.from_user.id,
                     file_id=msg.get("file_id"),
                     caption=f_caption,
+                    text=mr
                     protect_content=msg.get('protect', False),
                     )
-                await asyncio.sleep(10)
+                await asyncio.sleep(300)
                 await d.delete()
                 
             except FloodWait as e:
@@ -147,9 +149,10 @@ async def start(client, message):
                     chat_id=message.from_user.id,
                     file_id=msg.get("file_id"),
                     caption=f_caption,
+                    text=mr
                     protect_content=msg.get('protect', False),
                     )
-                await asyncio(10)
+                await asyncio(300)
                 await e.delete()
                 
             except Exception as e:
@@ -211,6 +214,7 @@ async def start(client, message):
             msg = await client.send_cached_media(
                 chat_id=message.from_user.id,
                 file_id=file_id,
+                text=mr
                 protect_content=True if pre == 'filep' else False,
                 )
             filetype = msg.media
@@ -218,7 +222,7 @@ async def start(client, message):
             title = file.file_name
             size=get_size(file.file_size)
             f_caption = f"<code>{title}</code>"
-            await asyncio.sleep(10)
+            await asyncio.sleep(300)
             await msg.delete()
             if CUSTOM_FILE_CAPTION:
                 try:
