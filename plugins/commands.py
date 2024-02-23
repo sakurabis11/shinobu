@@ -243,11 +243,11 @@ async def start(client, message):
         reply_markup=InlineKeyboardMarkup( [ [ InlineKeyboardButton('❤️‍🔥 ᴊᴏɪɴ ᴛᴏ ᴄʜᴀɴɴᴇʟ ❤️‍🔥', url=(MAIN_CHANNEL)) ] ] ),
         protect_content=True if pre == 'filep' else False,
         )
-    
-    t=await client.send_message(message.from_user.id, text=f"ᴛʜɪs ᴍᴇssᴀɢᴇ ᴡɪʟ ᴅᴇʟᴇᴛᴇ ɪɴ 𝟻 ᴍɪɴᴜᴛᴇ, ʙᴇᴄᴀᴜsᴇ ᴏғ ᴛʜᴇ ᴄᴏᴘʏʀɪɢʜᴛ ɪssᴜᴇ, sᴏ ᴘᴇᴀsᴇ ғᴏʀᴡᴀʀᴅ ᴛʜɪs ғɪʟᴇ ᴛᴏ ʏᴏᴜʀ sᴀᴠᴇᴅ ᴍᴇssᴀɢᴇ")
     await asyncio.sleep(30)
-    await z.delete()
+    t=await client.send_message(message.from_user.id, text=f"ᴛʜɪs ᴍᴇssᴀɢᴇ ᴡɪʟ ᴅᴇʟᴇᴛᴇ ɪɴ 𝟻 ᴍɪɴᴜᴛᴇ, ʙᴇᴄᴀᴜsᴇ ᴏғ ᴛʜᴇ ᴄᴏᴘʏʀɪɢʜᴛ ɪssᴜᴇ, sᴏ ᴘᴇᴀsᴇ ғᴏʀᴡᴀʀᴅ ᴛʜɪs ғɪʟᴇ ᴛᴏ ʏᴏᴜʀ sᴀᴠᴇᴅ ᴍᴇssᴀɢᴇ")
     await asyncio.sleep(29)
+    await z.delete()
+    
     await t.delete()
     await client.send_message(message.from_user.id, text=f"ᴛʜɪs ғɪʟᴇ ɪs ᴅᴇʟᴇᴛᴇᴅ ʙᴇᴄᴀᴜsᴇ ᴏғ ᴄᴏᴘʏʀɪɢʜᴛ ɪssᴜᴇ")         
 
