@@ -243,11 +243,12 @@ async def start(client, message):
         reply_markup=InlineKeyboardMarkup( [ [ InlineKeyboardButton('❤️‍🔥 ᴊᴏɪɴ ᴛᴏ ᴄʜᴀɴɴᴇʟ ❤️‍🔥', url=(MAIN_CHANNEL)) ] ] ),
         protect_content=True if pre == 'filep' else False,
         )
+    
     t=await client.send_message(message.from_user.id, text=f"ᴛʜɪs ᴍᴇssᴀɢᴇ ᴡɪʟ ᴅᴇʟᴇᴛᴇ ɪɴ 𝟻 ᴍɪɴᴜᴛᴇ, ʙᴇᴄᴀᴜsᴇ ᴏғ ᴛʜᴇ ᴄᴏᴘʏʀɪɢʜᴛ ɪssᴜᴇ, sᴏ ᴘᴇᴀsᴇ ғᴏʀᴡᴀʀᴅ ᴛʜɪs ғɪʟᴇ ᴛᴏ ʏᴏᴜʀ sᴀᴠᴇᴅ ᴍᴇssᴀɢᴇ")
     await asyncio.sleep(300)
-    await t.delete()
-    await asyncio.sleep(300)
     await z.delete()
+    await asyncio.sleep(300)
+    await t.delete()
     await client.send_message(message.from_user.id, text=f"ᴛʜɪs ғɪʟᴇ ɪs ᴅᴇʟᴇᴛᴇᴅ ʙᴇᴄᴀᴜsᴇ ᴏғ ᴄᴏᴘʏʀɪɢʜᴛ ɪssᴜᴇ")         
 
 @Client.on_message(filters.command('channel') & filters.user(ADMINS))
