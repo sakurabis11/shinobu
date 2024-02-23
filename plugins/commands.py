@@ -245,9 +245,9 @@ async def start(client, message):
         )
     
     t=await client.send_message(message.from_user.id, text=f"ᴛʜɪs ᴍᴇssᴀɢᴇ ᴡɪʟ ᴅᴇʟᴇᴛᴇ ɪɴ 𝟻 ᴍɪɴᴜᴛᴇ, ʙᴇᴄᴀᴜsᴇ ᴏғ ᴛʜᴇ ᴄᴏᴘʏʀɪɢʜᴛ ɪssᴜᴇ, sᴏ ᴘᴇᴀsᴇ ғᴏʀᴡᴀʀᴅ ᴛʜɪs ғɪʟᴇ ᴛᴏ ʏᴏᴜʀ sᴀᴠᴇᴅ ᴍᴇssᴀɢᴇ")
-    await asyncio.sleep(300)
+    await asyncio.sleep(30)
     await z.delete()
-    await asyncio.sleep(300)
+    await asyncio.sleep(29)
     await t.delete()
     await client.send_message(message.from_user.id, text=f"ᴛʜɪs ғɪʟᴇ ɪs ᴅᴇʟᴇᴛᴇᴅ ʙᴇᴄᴀᴜsᴇ ᴏғ ᴄᴏᴘʏʀɪɢʜᴛ ɪssᴜᴇ")         
 
