@@ -43,15 +43,18 @@ async def start(client, message):
         await client.send_message(LOG_CHANNEL, script.LOG_TEXT_P.format(message.from_user.id, message.from_user.mention))
     if len(message.command) != 2:
         buttons = [[
-            InlineKeyboardButton('Nᴏᴛʜɪɴɢ', callback_data='start')
+            InlineKeyboardButton("➕️ Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Cʜᴀᴛ ➕", url=f"http://t.me/{temp.U_NAME}?startgroup=true"),
+            ],[
+            InlineKeyboardButton("Hᴇʟᴩ 🕸️", callback_data="help"),
+            InlineKeyboardButton("Aʙᴏᴜᴛ ✨", callback_data="about")
+         ]]
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         m=await message.reply_sticker("CAACAgQAAxkBAAIvv2W6cFLv0PtaEwLT4ta09fABAxKkAAJuDwAC4eqxUNoxB5joJxGiHgQ") 
         await asyncio.sleep(5)
         await m.delete()        
         await message.reply_photo(
-            photo=random.choice(PICS),
-            caption=script.SUR_TXT.format(message.from_user.mention, temp.U_NAME, temp.B_NAME),
+            text=script.SUR_TXT.format(message.from_user.mention, temp.U_NAME, temp.B_NAME),
             reply_markup=reply_markup,
             parse_mode=enums.ParseMode.HTML
         )
@@ -132,14 +135,12 @@ async def start(client, message):
             if f_caption is None:
                 f_caption = f"{title}"
             try:
-                d=await client.send_cached_media(
+                await client.send_cached_media(
                     chat_id=message.from_user.id,
                     file_id=msg.get("file_id"),
                     caption=f_caption,
                     protect_content=msg.get('protect', False),
                     )
-                await asyncio.sleep(300)
-                await d.delete()
                 
             except FloodWait as e:
                 await asyncio.sleep(e.x)
@@ -219,8 +220,7 @@ async def start(client, message):
             title = file.file_name
             size=get_size(file.file_size)
             f_caption = f"<code>{title}</code>"
-            await asyncio.sleep(300)
-            await msg.delete()
+
             if CUSTOM_FILE_CAPTION:
                 try:
                     f_caption=CUSTOM_FILE_CAPTION.format(file_name= '' if title is None else title, file_size='' if size is None else size, file_caption='')
