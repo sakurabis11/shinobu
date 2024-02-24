@@ -717,11 +717,6 @@ async def cb_handler(client: Client, query: CallbackQuery):
         if settings is not None:
             buttons = [
                 [
-                    InlineKeyboardButton('Auto filter', callback_data=f'setgs#auto_filter#{settings["auto_filter"]}#{str(grp_id)}'),
-                    InlineKeyboardButton('✅ Yes' if settings["auto_filter"] else '❌ No',
-                                         callback_data=f'setgs#auto_filter#{settings["auto_filter"]}#{str(grp_id)}')
-                ],
-                [
                     InlineKeyboardButton('Filter Button',
                                          callback_data=f'setgs#button#{settings["button"]}#{str(grp_id)}'),
                     InlineKeyboardButton('Single' if settings["button"] else 'Double',
