@@ -418,16 +418,6 @@ async def settings(client, message):
         buttons = [
             [
                 InlineKeyboardButton(
-                    'Auto filter',
-                    callback_data=f'setgs#button#{settings["auto_filter"]}#{grp_id}',
-                ),
-                InlineKeyboardButton(
-                    'On' if settings["button"] else 'Off',
-                    callback_data=f'setgs#button#{settings["auto_filter"]}#{grp_id}',
-                ),
-            ],
-            [
-                InlineKeyboardButton(
                     'Filter Button',
                     callback_data=f'setgs#button#{settings["button"]}#{grp_id}',
                 ),
