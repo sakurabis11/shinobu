@@ -1,12 +1,12 @@
-FROM python:3.8-slim-buster
+FROM python:3.9  
 
-RUN apt update && apt upgrade -y
-RUN apt install git -y
-COPY requirements.txt /requirements.txt
+RUN apt-get update && apt-get install -y python3-dev 
 
-RUN cd /
-RUN pip3 install -U pip && pip3 install -U -r requirements.txt
-RUN mkdir /Elsa
-WORKDIR /Elsa
-COPY start.sh /start.sh
-CMD ["/bin/bash", "/start.sh"]
+
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+COPY ..
+
+CMD ["python3", "bot.py"]
