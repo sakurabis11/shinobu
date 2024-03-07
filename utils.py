@@ -40,21 +40,17 @@ class temp(object):
     B_NAME = None
     SETTINGS = {}
 
-async def is_subscribed(filter, client, update):
-    if not FORCE_SUB_CHANNEL:
-        return True
-    user_id = update.from_user.id
-    if user_id in ADMINS:
-        return True
-    try:
-        member = await client.get_chat_member(chat_id = FORCE_SUB_CHANNEL, user_id = user_id)
-    except UserNotParticipant:
-        return False
-
-    if not member.status in [ChatMemberStatus.OWNER, ChatMemberStatus.ADMINISTRATOR, ChatMemberStatus.MEMBER]:
-        return False
-    else:
-        return True
+async def not_subscribed(_, client, message):
+   if not client.f_channel:
+      return False
+   try:             
+      user = await client.get_chat_member(client.f_channel, message.from_user.id)
+   except UserNotParticipant:
+      pass
+   else:
+      if user.status != enums.ChatMemberStatus.BANNED:                       
+         return False 
+   return True
 
 async def is_subscribed(filter, client, update):
     if not FORCE_SUB_CHANNEL2:
