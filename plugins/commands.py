@@ -157,6 +157,8 @@ async def start(client, message):
             except Exception as e:
                 logger.warning(e, exc_info=True)
                 continue
+                await asncio.sleep(10)
+                await sd.delete()
             await asyncio.sleep(1) 
         await sts.delete()
         return
@@ -202,8 +204,6 @@ async def start(client, message):
                 except Exception as e:
                     logger.exception(e)
                     continue
-            await asyncio.sleep(10)
-            await sd.delete()
             await asyncio.sleep(1) 
         return await sts.delete()
         
