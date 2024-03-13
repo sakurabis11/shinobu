@@ -140,8 +140,7 @@ async def start(client, message):
                     caption=f_caption,
                     protect_content=msg.get('protect', False),
                     )
-                await asyncio.sleep(10)
-                await sd.delete()
+
                 
             except FloodWait as e:
                 await asyncio.sleep(e.x)
@@ -203,6 +202,8 @@ async def start(client, message):
                 except Exception as e:
                     logger.exception(e)
                     continue
+            await asyncio.sleep(10)
+            await sd.delete()
             await asyncio.sleep(1) 
         return await sts.delete()
         
@@ -251,7 +252,8 @@ async def start(client, message):
         reply_markup=InlineKeyboardMarkup( [ [ InlineKeyboardButton('❤️‍🔥 ᴊᴏɪɴ ᴛᴏ ᴄʜᴀɴɴᴇʟ ❤️‍🔥', url=(MAIN_CHANNEL)) ] ] ),
         protect_content=True if pre == 'filep' else False,
         )
-    
+
+
 @Client.on_message(filters.command('channel') & filters.user(ADMINS))
 async def channel_info(bot, message):
            
