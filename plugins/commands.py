@@ -140,7 +140,7 @@ async def start(client, message):
                     caption=f_caption,
                     protect_content=msg.get('protect', False),
                     )
-                await asyncio(10)
+                await asyncio.sleep(10)
                 await sd.delete()
                 
             except FloodWait as e:
@@ -152,7 +152,7 @@ async def start(client, message):
                     caption=f_caption,
                     protect_content=msg.get('protect', False),
                     )
-                await asyncio(300)
+                await asyncio(10)
                 await e.delete()
                 
             except Exception as e:
