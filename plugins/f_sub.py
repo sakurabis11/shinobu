@@ -3,7 +3,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from utils import not_subscriber
 import re
 
-@Client.on_message(filters.create(not_subscribed))
+@Client.on_message(filters.create(not_subscriber))
 async def is_not_subscribed(client, message):
     if message.text.startswith('/'): 
         buttons = [[InlineKeyboardButton(text="ᴊᴏɪɴ ᴍʏ ᴄʜᴀɴɴᴇʟ", url=client.invitelink)]]
