@@ -27,6 +27,7 @@ async def auto_request(client: Client, message: ChatMemberUpdated):
     print(user_status)
     passw = user_status.get('captcha')
     print(passw)
+    
     try:
        c = await client.ask(user_id , f"Hello {message.from_user.mention}\n\n📃 Enter the below 6-digit captcha to join in {title}\n\n📝 Captcha: {str(passw)}\n\n⏳ Time Out: 2 Min (120 Sec)" ,
                          filters=filters.text, timeout=120)
