@@ -35,13 +35,14 @@ async def auto_request(client: Client, message: ChatMemberUpdated):
         print(user_status)
         passw = user_status.get('captcha')
 
-        v=await client.send_message(chat_id=user_id, text=f"Hello {message.from_user.mention}\n\n<code>{str(passw)}</code>")
-        c = await client.listen(user_id)
-        print(f"captcha is {c.text}")
-        print(c)
-        if c.text == passw:
-            await client.send_message(chat_id=user_id, text="crt")
-            return
+        if chat_type == enums.ChatType.PRIVATE
+             v=await client.send_message(chat_id=user_id, text=f"Hello {message.from_user.mention}\n\n<code>{str(passw)}</code>")
+             c = await client.listen(user_id)
+             print(f"captcha is {c.text}")
+             print(c)
+             if c.text == passw:
+                 await client.send_message(chat_id=user_id, text="crt")
+                 return
 
     except Exception as e:
         await client.send_message(user_id, text=e)
