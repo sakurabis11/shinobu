@@ -7,7 +7,7 @@ from pyromod.exceptions import ListenerTimeout
 import random
 import string
 
-@user_status = {}
+user_status = {}
 
 @Client.on_chat_join_request()
 async def auto_request(client: Client, message: ChatMemberUpdated):
