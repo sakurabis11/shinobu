@@ -14,8 +14,6 @@ async def auto_request(client: Client, message: ChatMemberUpdated):
     chat_id = message.chat.id
     title = message.chat.title
     user_id = message.from_user.id
-    global user_status
-    print(user_id)
     letters = string.ascii_letters
     digits = string.digits
 
@@ -37,14 +35,22 @@ async def auto_request(client: Client, message: ChatMemberUpdated):
                await client.approve_chat_join_request(chat_id , user_id)
                await client.send_photo(chat_id=user_id , photo="https://telegra.ph/file/abce311b41052c52bc8ec.jpg" ,
                                        caption=f"Hello {message.from_user.mention}\n\nYou're joined in {title} Successfully")
+               await client.delete_messages(user_id, message_ids=[c.id])
+               await client.delete_messages(user_id , message_ids=[c.id-1])
                return
 
            elif c.text != password:
+               await client.delete_messages(user_id, message_ids=[c.id])
+               await client.delete_messages(user_id , message_ids=[c.id-1])
+               await asyncio.sleep(4)
+               await client.delete_messages(user_id , message_ids=[c.id+1])
                await client.send_message(user_id, text=f"The captcha is wrong")
 
                return
      except TimeoutError:
-       await client.send_message(user_id, text='You took too long to answer.')
+       x=await client.send_message(user_id, text='You took too long to answer.')
+       await client.delete_messages(user_id, message_ids=[x.id])
+
 
   except Exception as e:
      await client.send_message(user_id, text=e)
