@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y python3-dev
 WORKDIR /app
 COPY requirements.txt .
 
-RUN pip uninstall -y pyromod
+
 RUN pip install pyrofork
 
 RUN pip install -r requirements.txt
