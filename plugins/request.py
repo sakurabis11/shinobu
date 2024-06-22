@@ -47,7 +47,7 @@ async def auto_request(client: Client, message: ChatMemberUpdated):
                await client.delete_messages(user_id , message_ids=[c.id+1])
                return
      except TimeoutError:
-               await client.delete_messages(user_id , message_ids=[c.id-1])
+   
                return
 
 
