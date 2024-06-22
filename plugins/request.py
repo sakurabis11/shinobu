@@ -5,7 +5,7 @@ from pyrogram.errors import UserNotParticipant
 from pyrogram import filters
 import random
 import string
-
+import asyncio
 
 
 @Client.on_chat_join_request()
