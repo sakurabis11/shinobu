@@ -3,7 +3,6 @@ from pyrogram.enums import ChatMemberStatus
 from pyrogram.types import *
 from pyrogram.errors import UserNotParticipant
 from pyrogram import filters
-from pyromod.exceptions import ListenerTimeout
 import random
 import string
 
@@ -44,7 +43,7 @@ async def auto_request(client: Client, message: ChatMemberUpdated):
                await client.send_message(user_id, text=f"The captcha is wrong")
 
                return
-     except ListenerTimeout:
+     except TimeoutError:
        await client.send_message(user_id, text='You took too long to answer.')
 
   except Exception as e:
