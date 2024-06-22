@@ -39,7 +39,7 @@ async def auto_request(client: Client, message: ChatMemberUpdated):
                                        caption=f"Hello {message.from_user.mention}\n\nYou're joined in {title} Successfully")
                return
 
-           elif c.text != passw:
+           elif c.text != password:
                await client.send_message(user_id, text=f"The captcha is wrong")
 
                return
