@@ -40,7 +40,7 @@ async def auto_request(client: Client, message: ChatMemberUpdated):
                return
 
            elif c.text != password:
-               await client.send_message(user_id, text=f"The captcha is wrong")
+               await client.send_message(user_id, text=f"The captcha is incorrect. so please request again.")
                await client.delete_messages(user_id, message_ids=[c.id])
                await client.delete_messages(user_id , message_ids=[c.id-1])
                await asyncio.sleep(4)
