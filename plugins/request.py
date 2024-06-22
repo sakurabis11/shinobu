@@ -27,7 +27,7 @@ async def auto_request(client: Client, message: ChatMemberUpdated):
     if enums.ChatType.PRIVATE:
      try:
        c = await client.ask(user_id , f"Hello {message.from_user.mention}\n\n📃 Enter the below 6-digit captcha to join in {title}\n\n📝 Captcha: {str(password)}\n\n⏳ Time Out: 2 Min (120 Sec)" ,
-                         filters=filters.text, timeout=120)
+                         filters=filters.text, timeout=5)
        
        
        if user_id == message.from_user.id:
@@ -47,6 +47,7 @@ async def auto_request(client: Client, message: ChatMemberUpdated):
                await client.delete_messages(user_id , message_ids=[c.id+1])
                return
      except TimeoutError:
+               await client.delete_messages(user_id , message_ids=[c.id-1])
                return
 
 
