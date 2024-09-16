@@ -554,6 +554,8 @@ async def cb_handler(client: Client, query: CallbackQuery):
         await query.answer(MSG_ALRT)
     elif query.data == "help":
         buttons = [[
+            InlineKeyboardButton('🔗 ᴩᴏsᴛ sᴇɴᴅᴇʀ', callback_data='postsender'),
+            ],[
             InlineKeyboardButton('⚒ ᴍᴀɴɴᴜʟ ғɪʟᴛᴇʀ', callback_data='manuelfilter'),
             InlineKeyboardButton("🔎 Sᴇᴀʀᴄʜ", switch_inline_query_current_chat='') 
             ],[
@@ -595,6 +597,16 @@ async def cb_handler(client: Client, query: CallbackQuery):
             reply_markup=reply_markup,
             parse_mode=enums.ParseMode.HTML
         )
+    elif query.data == "postsender":
+        buttons = [[
+            InlineKeyboardButton('ʙᴀᴄᴋ', callback_data='help')
+        ]]
+        reply_markup = InlineKeyboardMarkup(buttons)
+        await query.message.edit_text(
+            text=script.POSTSENDER_TXT,
+            reply_markup=reply_markup,
+            parse_mode=enums.ParseMode.HTML
+        ) 
     elif query.data == "manuelfilter":
         buttons = [[
             InlineKeyboardButton('ʙᴀᴄᴋ', callback_data='help'),
