@@ -602,7 +602,6 @@ async def cb_handler(client: Client, query: CallbackQuery):
             InlineKeyboardButton('ʙᴀᴄᴋ', callback_data='help')
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
-        await query.message.photo("https://envs.sh/wNq.jpg")
         await query.message.edit_text(
             text=script.POSTSENDER_TXT.format(query.from_user.mention),
             reply_markup=reply_markup,
