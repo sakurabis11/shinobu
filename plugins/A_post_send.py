@@ -1,6 +1,7 @@
 from pyrogram import Client, filters, enums
 from pyrogram.types import *
 from pyrogram.errors import *
+import asyncio
 
 async def send_messages(group_id, message):
     try:
@@ -14,6 +15,18 @@ async def send_messages(group_id, message):
         return False, "Error"
     except Exception as e:
         return False, "Error"
+
+@Client.on_message(filters.command("get_id"))
+async def get_i_d(client:Client, message:Message):
+    chat_type = message.chat.type
+    if chat_type in [enums.ChatType.CHANNEL]:
+        id = message.chat.id
+        r=await message.reply(f"<code>/send {id}</code>\n\ncopy this command and reply to the post that you wanna to send to your channel. This message will delete in 8 seconds.")
+        await asyncio.sleep(8)
+        await r.delete()
+
+    elif chat_type in [enums.ChatType.PRIVATE, enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
+        return
 
 @Client.on_message(filters.command("send") & filters.reply & filters.private)
 async def send_msg(client:Client, message:Message):
