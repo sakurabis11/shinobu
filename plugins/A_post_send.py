@@ -10,12 +10,7 @@ async def send_messages(group_id, message):
         return messageid
     except FloodWait as e:
         await asyncio.sleep(e.x)
-        return await broadcast_messages(group_id, message)
-    except PeerIdInvalid:
-        print(f"{group_id} - PeerIdInvalid")
-        return False, "Error"
-    except Exception as e:
-        return False, "Error"
+        return await send_messages(group_id, message)
 
 @Client.on_message(filters.command("get_id"))
 async def get_i_d(client:Client, message:Message):
