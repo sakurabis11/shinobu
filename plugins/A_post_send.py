@@ -5,8 +5,9 @@ import asyncio
 
 async def send_messages(group_id, message):
     try:
-        await message.copy(chat_id=group_id)
-        return True, "Success"
+        idd=await message.copy(chat_id=group_id)
+        messageid = idd.id
+        return messageid
     except FloodWait as e:
         await asyncio.sleep(e.x)
         return await broadcast_messages(group_id, message)
@@ -31,9 +32,11 @@ async def get_i_d(client:Client, message:Message):
 @Client.on_message(filters.command("send") & filters.reply & filters.private)
 async def send_msg(client:Client, message:Message):
   try:
-    user_id = message.from_user.id
+    uid = message.from_user.id
+    user_id = int(uid)
     group_id = message.text.split()[1::]
-    groupid = "".join(group_id)
+    gid = "".join(group_id)
+    groupid = int(gid)
     msg = message.reply_to_message
 
     me = await client.get_me()
@@ -48,13 +51,13 @@ async def send_msg(client:Client, message:Message):
         await message.reply_text("Please promote me as admin.")
         return
 
-    suc = await send_messages(groupid, msg)
-    if suc:
-        await message.reply_text("Success.")
+    m_id = await send_messages(groupid, msg)
+    if m_id:
+       
+        await message.reply_text(f"Success. {m_id}")
+        await client.pin_chat_message(groupid, m_id)
     else:
         await message.reply_text("Something error occured.")
         return
   except Exception as e:
       await message.reply_text(e)
-
-
