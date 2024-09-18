@@ -11,14 +11,24 @@ async def send_messages(group_id, message):
 @Client.on_message(filters.command("get_id"))
 async def get_i_d(client:Client, message:Message):
     chat_type = message.chat.type
-    if chat_type in [enums.ChatType.CHANNEL]:
-        id = message.chat.id
-        r=await message.reply(f"<code>/send {id}</code>\n\ncopy this command and reply to the post that you wanna to send to your channel. This message will delete in 8 seconds.")
-        await asyncio.sleep(8)
+    msg = message.text
+    if chat_type in [enums.ChatType.CHANNEL, enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
+        ids = message.chat.id
+        r=await message.reply(f"<code>/send {ids}</code>\n\ncopy this command and reply to the post that you wanna to send to your channel. This message will delete in 8 seconds.")
+        r_id = r.id
+        user_msg_id = r_id - 1
+        await asyncio.sleep(8) 
         await r.delete()
+        xx=await client.get_messages(ids, user_msg_id)
+        x = xx.text
+        if (x=="/get_id"):
+            await client.delete_messages(ids, user_msg_id)
+        else:
+            pass
 
-    elif chat_type in [enums.ChatType.PRIVATE, enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
-        return
+    elif chat_type in [enums.ChatType.PRIVATE]:
+        await message.reply_text("This command is only work in channel and group.")
+    
 
 @Client.on_message(filters.command("send") & filters.reply & filters.private)
 async def send_msg(client:Client, message:Message):
@@ -44,9 +54,10 @@ async def send_msg(client:Client, message:Message):
 
     m_id = await send_messages(groupid, msg)
     if m_id:
-        
-        await message.reply_text(f"Success")
+       
+        await message.reply_text(f"Success. {m_id}")
         await client.pin_chat_message(groupid, m_id)
+        await client.delete_messages(groupid, m_id+1)
     else:
         await message.reply_text("Something error occured.")
         return
