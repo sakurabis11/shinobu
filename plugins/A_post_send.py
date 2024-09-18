@@ -4,13 +4,9 @@ from pyrogram.errors import *
 import asyncio
 
 async def send_messages(group_id, message):
-    try:
         idd=await message.copy(chat_id=group_id)
         messageid = idd.id
         return messageid
-    except FloodWait as e:
-        await asyncio.sleep(e.x)
-        return await send_messages(group_id, message)
 
 @Client.on_message(filters.command("get_id"))
 async def get_i_d(client:Client, message:Message):
@@ -48,8 +44,8 @@ async def send_msg(client:Client, message:Message):
 
     m_id = await send_messages(groupid, msg)
     if m_id:
-       
-        await message.reply_text(f"Success. {m_id}")
+        
+        await message.reply_text(f"Success")
         await client.pin_chat_message(groupid, m_id)
     else:
         await message.reply_text("Something error occured.")
