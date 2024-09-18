@@ -58,7 +58,7 @@ async def send_msg(client:Client, message:Message):
     m_id = await send_messages(groupid, msg)
     if m_id:
        
-        await message.reply_text(f"Success. {m_id}")
+        await message.reply_text(f"Success.")
         await client.pin_chat_message(groupid, m_id)
         await client.delete_messages(groupid, m_id+1)
     else:
