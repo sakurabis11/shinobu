@@ -10,6 +10,7 @@ async def send_messages(group_id, message):
 
 @Client.on_message(filters.command("get_id"))
 async def get_i_d(client:Client, message:Message):
+ try:
     chat_type = message.chat.type
     msg = message.text
     if chat_type in [enums.ChatType.CHANNEL, enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
@@ -28,6 +29,8 @@ async def get_i_d(client:Client, message:Message):
 
     elif chat_type in [enums.ChatType.PRIVATE]:
         await message.reply_text("This command is only work in channel and group.")
+ except Exception as e:
+         await message.reply_text(e)
     
 
 @Client.on_message(filters.command("send") & filters.reply & filters.private)
