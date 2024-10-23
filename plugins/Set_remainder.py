@@ -5,7 +5,7 @@ import pymongo
 from pymongo import MongoClient
 import os
 from os import environ
-from info import DATABASE_URI, 
+from info import DATABASE_URI, DATABASE_NAME
 import imdb
 
 ia = imdb.IMDb()
