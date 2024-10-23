@@ -14,7 +14,7 @@ client = MongoClient(DATABASE_URI)
 db = client[DATABASE_NAME]
 collection = db["remainder"]
 
-@Client.on_message(filters.command("search") & filters.private)
+@Client.on_message(filters.command("set") & filters.private)
 async def search_movie(client, message):
   try:
     movie_name = " ".join(message.text.split()[1::])
