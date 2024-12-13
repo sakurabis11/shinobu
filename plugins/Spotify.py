@@ -25,13 +25,13 @@ def get_access_token():
 
 from os import environ
 
-API_ID = int(os.environ.get('API_ID', '8914119'))
-API_HASH = os.environ.get('API_HASH', '652bae601b07c928b811bdb310fdb4b0')
-BOT_TOKEN = os.environ.get('SESSION', '7851303993:AAHYvJLSM3g2nzFKI0r4FrD4fvtrZw52tns')
+#API_ID = int(os.environ.get('API_ID', '8914119'))
+#API_HASH = os.environ.get('API_HASH', '652bae601b07c928b811bdb310fdb4b0')
+#BOT_TOKEN = os.environ.get('SESSION', '7851303993:AAHYvJLSM3g2nzFKI0r4FrD4fvtrZw52tns')
 
-user = Client("my_account", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
+#user = Client("my_account", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
 
-@user.on_message(filters.regex(r'https://open\.spotify\.com/track/([a-zA-Z0-9]+)'))
+@Client.on_message(filters.regex(r'https://open\.spotify\.com/track/([a-zA-Z0-9]+)'))
 async def spotify(client, message):
 
 
@@ -90,5 +90,5 @@ async def spotify(client, message):
     os.remove(ffile)
     os.remove(thumb)
 
-print("run")
-user.run()
+#print("run")
+#user.run()
