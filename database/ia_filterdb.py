@@ -70,21 +70,21 @@ async def get_search_results(query, file_type=None, max_results=(MAX_BTN), offse
     """For given query return (results, next_offset)"""
 
     query = query.strip()
-    #if filter:
-        #better ?
-        #query = query.replace(' ', r'(\s|\.|\+|\-|_)')
-        #raw_pattern = r'(\s|_|\-|\.|\+)' + query + r'(\s|_|\-|\.|\+)'
+    
+    # Improved pattern matching for movie/series names
     if not query:
         raw_pattern = '.'
     elif ' ' not in query:
-        raw_pattern = r'(\b|[\.\+\-_])' + query + r'(\b|[\.\+\-_])'
+        # Single word query - more lenient matching
+        raw_pattern = r'.*' + query + r'.*'
     else:
+        # Multi-word query - handle spaces better
         raw_pattern = query.replace(' ', r'.*[\s\.\+\-_]')
     
     try:
         regex = re.compile(raw_pattern, flags=re.IGNORECASE)
     except:
-        return []
+        return [], 0, 0
 
     if USE_CAPTION_FILTER:
         filter = {'$or': [{'file_name': regex}, {'caption': regex}]}
@@ -154,3 +154,4 @@ def unpack_new_file_id(new_file_id):
     )
     file_ref = encode_file_ref(decoded.file_reference)
     return file_id, file_ref
+
