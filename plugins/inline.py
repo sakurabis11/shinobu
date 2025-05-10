@@ -48,10 +48,13 @@ async def answer(bot, query):
 
     offset = int(query.offset or 0)
     reply_markup = get_reply_markup(query=string)
-    files, next_offset, total = await get_search_results(string,
-                                                  file_type=file_type,
-                                                  max_results=10,
-                                                  offset=offset)
+    
+    search_query = string.lower()
+    
+    files, next_offset, total = await get_search_results(search_query,
+                                              file_type=file_type,
+                                              max_results=10,
+                                              offset=offset)
 
     for file in files:
         title=file.file_name
@@ -107,3 +110,4 @@ def get_reply_markup(query):
         ]
         ]
     return InlineKeyboardMarkup(buttons)
+
